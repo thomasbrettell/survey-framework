@@ -1,0 +1,173 @@
+{
+  "title": "Survey example",
+  "questions": [
+    {
+      "title": "Select the group that most identify with you",
+      "elements": [
+        {
+          "titleLocation": "hidden",
+          "name": "Select the group that most identify with you",
+          "type": "radiogroup",
+          "isRequired": true,
+          "choices": [
+            "Health provider - individual level",
+            "Health provider - organisation level",
+            "General public",
+            "Clinical organisation",
+            "Industry/technology",
+            "Research/academia",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "What is your primary area of health?",
+      "elements": [
+        {
+          "titleLocation": "hidden",
+          "type": "checkbox",
+          "name": "What is your primary area of health?",
+          "isRequired": true,
+          "choices": [
+            "General Practinioner",
+            "Dentist",
+            "Physiotherapist",
+            "Osteopath",
+            "Podiatrist",
+            "Chiropractor",
+            "Optometrist",
+            "Dietritian",
+            "Nurse",
+            "Midwife",
+            "Pharmacist",
+            "Occupational Therapist",
+            "Exercise Pysiologist",
+            "Audiologist",
+            "Care Worker",
+            "Social Worker",
+            "Speech Pathologist",
+            "Psychologist",
+            "Chinese Medicine Practitioner",
+            "Radiography/Ultra-sonologist",
+            "Aboriginal Health Worker",
+            "Medical Specialist",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Since you selected other, what is the area this is effectively connect, commuciate and coordinate care across the patient care jouirney through technology?",
+      "elements": [
+        {
+          "titleLocation": "hidden",
+          "type": "comment",
+          "isRequired": true,
+          "name": "Other",
+          "placeHolder": "Type here",
+          "rows": 5
+        }
+      ]
+    },
+    {
+      "title": "List the other area of healthcare services h organisation provides?",
+      "elements": [
+        {
+          "titleLocation": "hidden",
+          "type": "multipletext",
+          "name": "List the other area of healthcare services h organisation provides?",
+          "items": [
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 1",
+              "placeHolder": "Other areas of health"
+            },
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 2",
+              "placeHolder": "Other areas of health"
+            },
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 3",
+              "placeHolder": "Other areas of health"
+            },
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 4",
+              "placeHolder": "Other areas of health"
+            },
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 5",
+              "placeHolder": "Other areas of health"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "How would the organisation rate the importance of digital technology to transform and improve healthcare outcomes for all Australians?",
+      "description": "1 mean low, 5 high",
+      "elements": [
+        {
+          "titleLocation": "hidden",
+          "isRequired": true,
+          "description": "1 mean low, 5 high",
+          "type": "rating",
+          "name": "How would the organisation rate the importance of digital technology to transform and improve healthcare outcomes for all Australians?"
+        }
+      ]
+    },
+    {
+      "title": "How would the organisation rate the importance of digital technology to transform and improve healthcare outcomes for all Australians?",
+      "elements": [
+        {
+          "type": "rating",
+          "isRequired": true,
+          "name": "<Equitable high quality health care>",
+          "title": "<Equitable high quality health care>",
+          "minRateDescription": "Strongly disagree",
+          "maxRateDescription": "Strongly agree"
+        },
+        {
+          "type": "rating",
+          "isRequired": true,
+          "name": "<Improve condition mechanism>",
+          "title": "<Improve condition mechanism>",
+          "minRateDescription": "Strongly disagree",
+          "maxRateDescription": "Strongly agree"
+        },
+        {
+          "type": "rating",
+          "isRequired": true,
+          "name": "<Quick access to health information>",
+          "title": "<Quick access to health information>",
+          "minRateDescription": "Strongly disagree",
+          "maxRateDescription": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "title": "Do you have any additional feedback to help inform the next National Digital Health Strategy",
+      "elements": [
+        {
+          "titleLocation": "hidden",
+          "name": "Do you have any additional feedback to help inform the next National Digital Health Strategy",
+          "type": "radiogroup",
+          "isRequired": true,
+          "choices": [
+            "Yes, I have additional feedback",
+            "No, I've given all my feedback"
+          ]
+        }
+      ]
+    }
+  ]
+}
