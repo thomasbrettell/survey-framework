@@ -5,7 +5,7 @@ import * as Survey from "survey-jquery";
 import exampleSurveyJSON from '../surveys/survey-example.json';
 
 var surveyResults = [];
-var questionCount = -1;
+var questionCount = 0;
 
 Survey.Serializer.addProperty("question", "customClasses:text");
 Survey.Serializer.addProperty("survey", "otherJSON:text");
@@ -31,12 +31,13 @@ exampleSurveyJSON.questions.forEach(function(question, index) {
   survey.onComplete.add(addQuestionData);
   survey.onValueChanging.add(checkValidity)
   survey.completeText = 'Next';
+  survey.hideRequiredErrors = true;
 
   survey.onAfterRenderQuestion.add(addEventListeners)
 
   survey.onUpdateQuestionCssClasses.add(addCustomClasses)
   questionCount = questionCount + 1;
-  $("#surveyContainer"+index).Survey({model:survey});
+  $("#surveyContainer"+(index+1)).Survey({model:survey});
 })
 
 function addCustomClasses(survey, options) {
@@ -49,8 +50,12 @@ function addCustomClasses(survey, options) {
 }
 
 function addQuestionData(sender) {
-  appendQuestion(sender.otherJSON, sender.renderedElement.id) 
   surveyResults.push(sender.data)
+  console.log(surveyResults)
+  if(sender.otherJSON) {
+    appendQuestion(sender.otherJSON, sender.renderedElement.id) 
+    return;
+  }
   // console.log(sender.renderedElement.id)
   // console.log(sender.otherJSON)
   $('.sv_complete_btn').attr('disabled', true);
@@ -93,8 +98,31 @@ setTimeout(function() {
   console.log($('textarea'))
 },1000)
 
-function appendQuestion(object, location) {
-  console.log(object)
+function appendQuestion(question, location) {
   console.log(location)
   console.log(questionCount)
+  console.log($("#"+location).parent().parent())
+  questionCount = questionCount + 1;
+  $('.swiper-slide-next').removeClass('swiper-slide-next')
+  $("#"+location).parent().parent().after(`
+    <div class='swiper-slide swiper-slide-next'>
+      <div class='question'>
+        <div id="surveyContainer${questionCount}"></div>
+      </div>
+    </div>
+  `)
+  surveySwiper.update()
+  var survey = new Survey.Model(question);
+
+  survey.onComplete.add(addQuestionData);
+  survey.onValueChanging.add(checkValidity)
+  survey.completeText = 'Next';
+  survey.hideRequiredErrors = true;
+
+  survey.onAfterRenderQuestion.add(addEventListeners)
+
+  survey.onUpdateQuestionCssClasses.add(addCustomClasses)
+  $("#surveyContainer"+questionCount).Survey({model:survey});
+
+  surveySwiper.slideNext();
 }

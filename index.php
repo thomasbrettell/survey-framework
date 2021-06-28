@@ -21,7 +21,7 @@ $survey_json = json_decode(file_get_contents('surveys/survey-example.json'), tru
       ?>
         <div class="swiper-slide">
           <div class='question'>
-            <div id="surveyContainer<?php echo $index; ?>"></div>
+            <div id="surveyContainer<?php echo $index + 1; ?>"></div>
           </div>
         </div>
       <?php
