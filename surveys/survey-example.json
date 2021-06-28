@@ -48,6 +48,28 @@
     },
     {
       "title": "Select the group that most identify with you",
+      "otherJSON": {
+        "title": "Other options example",
+        "elements": [
+          {
+            "type": "matrixdynamic",
+            "name": "dynamictext",
+            "title": "Please rate your teachers",
+            "addRowText": "Add more",
+            "titleLocation": "hidden",
+            "isRequired": true,
+            "columns": [
+              {
+                "name": "subject",
+                "cellType": "text",
+                "titleLocation": "hidden",
+                "placeHolder": "Prefil text"
+              }
+            ],
+            "rowCount": 1
+          }
+        ]
+      },
       "elements": [
         {
           "titleLocation": "hidden",

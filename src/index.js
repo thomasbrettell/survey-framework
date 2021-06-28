@@ -3,6 +3,7 @@ import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
 import * as Survey from "survey-jquery";
 import exampleSurveyJSON from '../surveys/survey-example.json';
+import _ from 'lodash';
 
 var surveyResults = [];
 var questionCount = 0;
@@ -51,8 +52,9 @@ function addCustomClasses(survey, options) {
 
 function addQuestionData(sender) {
   surveyResults.push(sender.data)
-  console.log(surveyResults)
-  if(sender.otherJSON) {
+  console.log(_.includes(sender.data, "Other"))
+  console.log(sender.data)
+  if(sender.otherJSON && _.includes(sender.data, "Other")) {
     appendQuestion(sender.otherJSON, sender.renderedElement.id) 
     return;
   }
