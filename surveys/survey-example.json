@@ -2,6 +2,51 @@
   "title": "Survey example",
   "questions": [
     {
+      "title": "Lorem ipsum dolor sit amet elitr?",
+      "otherJSON": {
+        "title": "Lorem ipsum dolor sit amet elitr?",
+        "elements": [
+          {
+            "type": "matrixdynamic",
+            "name": "dynamictext",
+            "title": "Please rate your teachers",
+            "addRowText": "Add more",
+            "titleLocation": "hidden",
+            "isRequired": true,
+            "columns": [
+              {
+                "name": "subject",
+                "cellType": "text",
+                "titleLocation": "hidden",
+                "placeHolder": "Prefil text"
+              }
+            ],
+            "rowCount": 1
+          }
+        ]
+      },
+      "elements": [
+        {
+          "type": "matrixdynamic",
+          "name": "dynamictext",
+          "title": "Please rate your teachers",
+          "addRowText": "Add more",
+          "titleLocation": "hidden",
+          "isRequired": true,
+          "customClasses": "test",
+          "columns": [
+            {
+              "name": "subject",
+              "cellType": "text",
+              "titleLocation": "hidden",
+              "placeHolder": "Prefil text"
+            }
+          ],
+          "rowCount": 1
+        }
+      ]
+    },
+    {
       "title": "Select the group that most identify with you",
       "elements": [
         {
@@ -127,30 +172,26 @@
     },
     {
       "title": "How would the organisation rate the importance of digital technology to transform and improve healthcare outcomes for all Australians?",
+      "description": "1 mean low, 5 high",
+      "showQuestionNumbers": "off",
       "elements": [
         {
           "type": "rating",
           "isRequired": true,
-          "name": "<Equitable high quality health care>",
-          "title": "<Equitable high quality health care>",
-          "minRateDescription": "Strongly disagree",
-          "maxRateDescription": "Strongly agree"
+          "name": "<Patient identification and registration systems>",
+          "title": "<Patient identification and registration systems>"
         },
         {
           "type": "rating",
           "isRequired": true,
-          "name": "<Improve condition mechanism>",
-          "title": "<Improve condition mechanism>",
-          "minRateDescription": "Strongly disagree",
-          "maxRateDescription": "Strongly agree"
+          "name": "<Integrate communication systems>",
+          "title": "<Integrate communication systems>"
         },
         {
           "type": "rating",
           "isRequired": true,
-          "name": "<Quick access to health information>",
-          "title": "<Quick access to health information>",
-          "minRateDescription": "Strongly disagree",
-          "maxRateDescription": "Strongly agree"
+          "name": "<Databases training>",
+          "title": "<Databases training>"
         }
       ]
     },

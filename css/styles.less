@@ -359,6 +359,10 @@ template {
   box-sizing: border-box;
 }
 
+table {
+  border-spacing: 0;
+}
+
 body {
   background-color: white;
   font-family: 'Inter';
@@ -372,12 +376,17 @@ body {
     margin: 0;
   }
 
+  fieldset {
+    font-size: 0;
+  }
+
   .sv_header {
     line-height: 26px;
     font-size: 18px;
     h3 {
       font-size: inherit;
       color: @blue;
+      margin-bottom: 20px;
       span {
         font-size: inherit;
       }
@@ -388,11 +397,30 @@ body {
       font-weight: normal;
     }
   }
-  // .sv_header__text {
-  //   font-size: 18px;
-  //   color: @blue;
-  // }
 
+  .sv_qstn {
+    overflow: unset;
+  }
+
+  .sv_q_matrix_dynamic {
+    .sv_matrix_cell_actions {
+      display: none;
+    }
+
+    .sv_matrix_cell_header {
+      display: none;
+    }
+  }
+  .sv_matrix_dynamic_button {
+    color: @blue;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    margin-bottom: 15px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid @blue;
+  }
 
   .swiper-slide {
     visibility: hidden;
@@ -436,12 +464,24 @@ body {
     border-radius: 4px;
     margin-bottom: 14px;
     line-height: 22px;
+    padding: 10px;
 
     &::placeholder {
       color: #C1C1C1;
     }
   }
 
+  .square {
+    .sv_q_checkbox {
+      display: flex;
+
+      label {
+        width: 100%;
+        border-radius: 4px;
+        margin-right: 0;
+      }
+    }
+  }
   .sv_q_radiogroup, .sv_q_checkbox {
     display: inline-flex;
     width: auto;
@@ -478,6 +518,57 @@ body {
 
     .checkbox-material {
       display: none;
+    }
+  }
+
+  .sv_q_title {
+    font-size: 16px;
+    color: @blue;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 15px;
+
+    .sv_q_required_text {
+      display: none;
+    }
+  }
+
+  .sv_q_rating {
+    margin-bottom: 15px;
+
+    .sv_q_rating_item {
+      margin-right: 5px;
+      cursor: pointer;
+      font-size: 24px;
+      border-radius: 3px;
+      border: solid 1px #666666;
+      height: 60px;
+      width: 60px;
+      display: inline-block;
+      font-weight: 400;
+  
+      &:hover {
+        background: #666666;
+        color: white      
+      }
+  
+      &.active {
+        background: #666666;
+        color: white
+      }
+  
+      .sv_q_rating_item_text {
+        width: 100%;
+        align-items: center;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      @media (max-width:362px) {
+        height: 16vw;
+        width: 16vw;
+      }
     }
   }
 

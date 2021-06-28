@@ -4,18 +4,14 @@ import 'swiper/swiper-bundle.css';
 import * as Survey from "survey-jquery";
 import exampleSurveyJSON from '../surveys/survey-example.json';
 
-console.log('yay')
 var surveyResults = [];
+var questionCount = -1;
 
+Survey.Serializer.addProperty("question", "customClasses:text");
+Survey.Serializer.addProperty("survey", "otherJSON:text");
 
 const surveySwiper = new Swiper('#survey', {
   direction: 'vertical',
-  // pagination: {
-  //   el: ".swiper-pagination",
-  //   renderBullet: function (index, className) {
-  //     return '<span class="' + className + '">' + (index + 1) + "</span>";
-  //   },
-  // },
   pagination: {
     el: ".swiper-pagination",
     type: "progressbar",
@@ -37,14 +33,26 @@ exampleSurveyJSON.questions.forEach(function(question, index) {
   survey.completeText = 'Next';
 
   survey.onAfterRenderQuestion.add(addEventListeners)
-  console.log(survey)
 
+  survey.onUpdateQuestionCssClasses.add(addCustomClasses)
+  questionCount = questionCount + 1;
   $("#surveyContainer"+index).Survey({model:survey});
 })
 
+function addCustomClasses(survey, options) {
+  var classes = options.cssClasses
+  console.log(options.question.customClasses)
+
+  if (options.question.customClasses) {
+    classes.root += " "+options.question.customClasses;
+  }
+}
+
 function addQuestionData(sender) {
+  appendQuestion(sender.otherJSON, sender.renderedElement.id) 
   surveyResults.push(sender.data)
-  console.log(surveyResults)
+  // console.log(sender.renderedElement.id)
+  // console.log(sender.otherJSON)
   $('.sv_complete_btn').attr('disabled', true);
   surveySwiper.slideNext();
 }
@@ -52,6 +60,9 @@ function addQuestionData(sender) {
 function addEventListeners(survey, options) {
   console.log(survey)
   console.log(options.question)
+  console.log(survey.data)
+
+  console.log(options.question.customClasses)
 }
 
 function checkValidity(survey) {
@@ -81,3 +92,9 @@ setTimeout(function() {
   })
   console.log($('textarea'))
 },1000)
+
+function appendQuestion(object, location) {
+  console.log(object)
+  console.log(location)
+  console.log(questionCount)
+}

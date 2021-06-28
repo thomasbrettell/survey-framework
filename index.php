@@ -19,7 +19,7 @@ $survey_json = json_decode(file_get_contents('surveys/survey-example.json'), tru
       <?php 
       foreach ($survey_json['questions'] as $index => $question) {
       ?>
-        <div class="swiper-slide" data-question-number='<?php echo $index; ?>'>
+        <div class="swiper-slide">
           <div class='question'>
             <div id="surveyContainer<?php echo $index; ?>"></div>
           </div>
