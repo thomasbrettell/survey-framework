@@ -403,6 +403,8 @@ body {
   }
 
   .sv_q_matrix_dynamic {
+    width: 100%;
+
     .sv_matrix_cell_actions {
       display: none;
     }
@@ -424,8 +426,13 @@ body {
 
   .swiper-slide {
     visibility: hidden;
+    padding: 0 5%;
     
     &.swiper-slide-active {
+      visibility: visible;
+    }
+
+    &.swiper-slide-prev {
       visibility: visible;
     }
   }
@@ -449,10 +456,6 @@ body {
       cursor: not-allowed;
       background: @light_grey;
     }
-  }
-
-  .sv_q {
-    // font-size: 0;
   }
 
   .sv_q_text_root, textarea {
@@ -575,10 +578,10 @@ body {
   .question {
     width: 100%;
     height: 100%;
-    max-width: 1200px;
+    max-width: 520px;
     background-color: white;
     margin: auto;
-    padding: 50px 5% 20px;
+    padding: 50px 0 20px;
     overflow: auto;
   }
 

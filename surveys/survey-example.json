@@ -90,6 +90,43 @@
     },
     {
       "title": "What is your primary area of health?",
+      "otherJSON": {
+        "title": "What is your primary area of health?",
+        "elements": [
+          {
+            "titleLocation": "hidden",
+            "type": "checkbox",
+            "name": "What is your primary area of health?",
+            "isRequired": true,
+            "maxSelectedChoices": 3,
+            "choices": [
+              "General Practinioner",
+              "Dentist",
+              "Physiotherapist",
+              "Osteopath",
+              "Podiatrist",
+              "Chiropractor",
+              "Optometrist",
+              "Dietritian",
+              "Nurse",
+              "Midwife",
+              "Pharmacist",
+              "Occupational Therapist",
+              "Exercise Pysiologist",
+              "Audiologist",
+              "Care Worker",
+              "Social Worker",
+              "Speech Pathologist",
+              "Psychologist",
+              "Chinese Medicine Practitioner",
+              "Radiography/Ultra-sonologist",
+              "Aboriginal Health Worker",
+              "Medical Specialist",
+              "Other"
+            ]
+          }
+        ]
+      },
       "elements": [
         {
           "titleLocation": "hidden",
@@ -228,6 +265,43 @@
           "choices": [
             "Yes, I have additional feedback",
             "No, I've given all my feedback"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "What is your primary area of health?",
+      "elements": [
+        {
+          "titleLocation": "hidden",
+          "type": "checkbox",
+          "name": "What is your primary area of health?",
+          "isRequired": true,
+          "maxSelectedChoices": 3,
+          "choices": [
+            "General Practinioner",
+            "Dentist",
+            "Physiotherapist",
+            "Osteopath",
+            "Podiatrist",
+            "Chiropractor",
+            "Optometrist",
+            "Dietritian",
+            "Nurse",
+            "Midwife",
+            "Pharmacist",
+            "Occupational Therapist",
+            "Exercise Pysiologist",
+            "Audiologist",
+            "Care Worker",
+            "Social Worker",
+            "Speech Pathologist",
+            "Psychologist",
+            "Chinese Medicine Practitioner",
+            "Radiography/Ultra-sonologist",
+            "Aboriginal Health Worker",
+            "Medical Specialist",
+            "Other"
           ]
         }
       ]

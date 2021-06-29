@@ -43,7 +43,6 @@ exampleSurveyJSON.questions.forEach(function(question, index) {
 
 function addCustomClasses(survey, options) {
   var classes = options.cssClasses
-  console.log(options.question.customClasses)
 
   if (options.question.customClasses) {
     classes.root += " "+options.question.customClasses;
@@ -53,7 +52,8 @@ function addCustomClasses(survey, options) {
 function addQuestionData(sender) {
   surveyResults.push(sender.data)
   console.log(_.includes(sender.data, "Other"))
-  console.log(sender.data)
+  console.log('vvRESULTSvv')
+  console.log(surveyResults)
   if(sender.otherJSON && _.includes(sender.data, "Other")) {
     appendQuestion(sender.otherJSON, sender.renderedElement.id) 
     return;
@@ -126,5 +126,6 @@ function appendQuestion(question, location) {
   survey.onUpdateQuestionCssClasses.add(addCustomClasses)
   $("#surveyContainer"+questionCount).Survey({model:survey});
 
+  $('.sv_complete_btn').attr('disabled', true);
   surveySwiper.slideNext();
 }
