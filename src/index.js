@@ -1,22 +1,12 @@
 import $ from 'jquery';
-// import Swiper from 'swiper/bundle';
-// import 'swiper/swiper-bundle.css';
+import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
 import * as Survey from "survey-jquery";
 import exampleSurveyJSON from '../surveys/survey-example.json';
 import _ from 'lodash';
-import slick from 'slick-carousel';
-import 'slick-carousel/slick/slick.css'
-
-console.log(slick)
 
 var surveyResults = [];
 var questionCount = 0;
-
-// exampleSurveyJSON.questions.forEach(question, function() {
-//   $('#survey').append(`
-
-//   `)
-// })
 
 
 //add custom properties to the survey questions
@@ -25,26 +15,19 @@ Survey.Serializer.addProperty("survey", "otherJSON:text");
 
 
 //initialise swiper
-// const surveySwiper = new Swiper('#survey', {
-//   direction: 'vertical',
-//   pagination: {
-//     el: ".swiper-pagination",
-//     type: "progressbar",
-//     progressbarOpposite: true,
-//   },
-//   navigation: {
-//     nextEl: '.next-question',
-//     prevEl: '.swiper-button-prev',
-//   },
-//   allowTouchMove: false,
-//   slidesPerView: 1
-// });
-$("#survey").slick({
-  draggable: false,
-  infinite: false,
-  touchMove: false,
-  vertical: true,
-  arrows: false
+const surveySwiper = new Swiper('#survey', {
+  direction: 'vertical',
+  pagination: {
+    el: ".swiper-pagination",
+    type: "progressbar",
+    progressbarOpposite: true,
+  },
+  navigation: {
+    nextEl: '.next-question',
+    prevEl: '.swiper-button-prev',
+  },
+  allowTouchMove: false,
+  slidesPerView: 1
 });
 
 
@@ -53,25 +36,16 @@ exampleSurveyJSON.questions.forEach(function (question, index) {
   var survey = new Survey.Model(question);
 
   survey.onComplete.add(addQuestionData);
-  survey.onCompleting.add(function() {
-    console.log('Completing')
-  })
-  survey.onValueChanged.add(checkValidity)
+  survey.onValueChanging.add(checkValidity)
   survey.completeText = 'Next';
   survey.hideRequiredErrors = true;
   survey.onUpdateQuestionCssClasses.add(addCustomClasses)
-  survey.onCurrentPageChanged.add(testFunction)
 
   questionCount = questionCount + 1;
-  $()
   $("#surveyContainer" + (index + 1)).Survey({ model: survey });
 })
 $('.sv_complete_btn').attr('disabled', true); //disable next buttons
 
-
-function testFunction(survey) {
-  console.log(survey)
-}
 
 //add customs classes if there is one
 function addCustomClasses(survey, options) {
@@ -91,19 +65,13 @@ function addQuestionData(sender) {
     appendQuestion(sender.otherJSON, sender.renderedElement.id)
     return;
   }
-  if (sender.yesJSON && shouldAddendQuestion("Yes", sender.data)) {
-    appendQuestion(sender.yesJSON, sender.renderedElement.id)
-    return;
-  }
   $('.sv_complete_btn').attr('disabled', true);
-  // surveySwiper.slideNext();
-  $("#survey").slick('slickNext');
+  surveySwiper.slideNext();
 }
 
 
 //enables next if no errors
 function checkValidity(survey) {
-  console.log(survey.data)
   if (survey.hasErrors() === false) {
     $('.sv_complete_btn').attr('disabled', false);
   } else {
