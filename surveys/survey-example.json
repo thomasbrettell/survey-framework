@@ -15,7 +15,6 @@
             "isRequired": true,
             "columns": [
               {
-                "name": "subject",
                 "cellType": "text",
                 "titleLocation": "hidden",
                 "placeHolder": "Prefil text"
@@ -36,7 +35,6 @@
           "customClasses": "test",
           "columns": [
             {
-              "name": "subject",
               "cellType": "text",
               "titleLocation": "hidden",
               "placeHolder": "Prefil text"
