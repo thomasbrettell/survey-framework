@@ -349,22 +349,16 @@ template {
 }
 //** End of normalize **//
 
+
 @blue: #005ba6;
 @dark_blue: #003764;
 @light_grey: #e1e1e1;
 @grey: #666666;
 @dark_grey: #333333;
 
-.slick-arrow {
-  position: absolute;
-  top: 0;
-}
-.temp {
-  width: 100vw;
-  height: 100vh;
-}
-.slick-list {
-  height: 100% !important;
+html, body {
+  height: 100%;
+  width: 100%;
 }
 
 * {
@@ -380,10 +374,31 @@ body {
   font-family: 'Inter';
 }
 
+.slick-list, .slick-track, .slick-slide, .slick-slider {
+  touch-action: none !important;
+  overflow: hidden;
+}
+
+.slider-view {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-list {
+  overflow: hidden;
+  transform: translateY(0px);
+  &.transitioning {
+    transition: transform .5s ease-in-out;
+  }
+}
+
 #survey {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
 
   h3, h5 {
     margin: 0;
@@ -450,7 +465,7 @@ body {
   //   }
   // }
 
-  .sv_complete_btn {
+  .next-question, .sv_complete_btn {
     border-radius: 9999px;
     background: @blue;
     color: white;
@@ -514,6 +529,7 @@ body {
       cursor: pointer;
       margin-right: 15px;
       margin-bottom: 15px;
+      position: relative;
 
       &:hover {
         color: white;
@@ -521,7 +537,16 @@ body {
       }
 
       input {
-        display: none;
+        width: 100%;
+        height: 100%;
+        border: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: transparent;
+        background: transparent;
+        appearance: none;
       }
     }
 
@@ -562,6 +587,7 @@ body {
       width: 60px;
       display: inline-block;
       font-weight: 400;
+      position: relative;
   
       &:hover {
         background: #666666;
@@ -571,6 +597,15 @@ body {
       &.active {
         background: #666666;
         color: white
+      }
+
+      input {
+        position: absolute;
+        overflow: hidden;
+        height: 100% !important;
+        width: 100% !important;
+        appearance: none;
+        clip: initial;
       }
   
       .sv_q_rating_item_text {
@@ -586,6 +621,14 @@ body {
         width: 16vw;
       }
     }
+  }
+
+  .question-container {
+    // overflow: auto;
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    padding: 0 5%;
   }
 
   .question {
@@ -606,12 +649,6 @@ body {
     color: white;
     height: 20px;
     width: 20px;
-  }
-
-  .next-question {
-    width: 70px;
-    height: 30px;
-    background-color: blue;
   }
 
   .sv_q_mt_title {

@@ -1,7 +1,3 @@
-<?php 
-$survey_json = json_decode(file_get_contents('surveys/survey-example.json'), true);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,39 +8,8 @@ $survey_json = json_decode(file_get_contents('surveys/survey-example.json'), tru
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/font/Inter/styles.css">
 </head>
-<body data-survey-title='<?php echo $survey_json["title"]; ?>'>
-
-  <div id='survey'>
-    <?php 
-      foreach ($survey_json['questions'] as $index => $question) {
-      ?>
-      <div class='temp'>
-        <div class='question'>
-            <div id="surveyContainer<?php echo $index + 1; ?>"></div>
-          </div>
-        </div>
-      <?php
-      }
-      ?>
-  </div>
-
-  <!-- <div id='survey' class="swiper-container">
-    <div class="swiper-wrapper">
-      <?php 
-      foreach ($survey_json['questions'] as $index => $question) {
-      ?>
-        <div class="swiper-slide">
-          <div class='question'>
-            <div id="surveyContainer<?php echo $index + 1; ?>"></div>
-          </div>
-        </div>
-      <?php
-      }
-      ?>
-    </div>
-    <div class="swiper-pagination"></div>
-  </div> -->
-
+<body>
+  <div id='survey'></div>
 </body>
-<script src="dist/main.js"></script>
+<script src="dist/bundle.js"></script>
 </html>
