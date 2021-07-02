@@ -3,27 +3,6 @@
   "questions": [
     {
       "title": "Lorem ipsum dolor sit amet elitr?",
-      "elements": [
-        {
-          "name": "name",
-          "type": "text",
-          "title": "Please enter your name:",
-          "placeHolder": "Jon Snow",
-          "isRequired": true,
-          "autoComplete": "name"
-        },
-        {
-          "name": "name2",
-          "type": "text",
-          "title": "Please enter your name:",
-          "placeHolder": "Jon Snow",
-          "isRequired": true,
-          "autoComplete": "name"
-        }
-      ]
-    },
-    {
-      "title": "Lorem ipsum dolor sit amet elitr?",
       "otherJSON": {
         "title": "Other options example",
         "elements": [

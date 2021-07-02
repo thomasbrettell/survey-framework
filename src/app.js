@@ -9,14 +9,9 @@ let surveyResults = [];
 let questionCount = 0;
 let questionNum = 0;
 
-// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
 let vh = window.innerHeight * 0.01;
-// Then we set the value in the --vh custom property to the root of the document
 document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-// We listen to the resize event
 window.addEventListener('resize', () => {
-  // We execute the same script as before
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
@@ -27,13 +22,12 @@ $('#survey').append(`
   </div>
 </div>
 `)
-console.log('test')
 exampleSurveyJSON.questions.forEach(function(question, index) {
   $('.slider-list').append(`
   <div class='question-container'>
     <div class='question'>
       <div id="surveyContainer${index + 1}"></div>
-      <button type='submit' class='next-question'>Next</button>
+      <button type='submit' class='next-question' disabled>Next</button>
     </div>
   </div>
   `)
@@ -130,29 +124,6 @@ exampleSurveyJSON.questions.forEach(function (question, index) {
   // survey.hideRequiredErrors = true;
   survey.onUpdateQuestionCssClasses.add(addCustomClasses)
   survey.onAfterRenderQuestionInput.add(addEventListeners)
-//   survey.onAfterRenderQuestionInput.add(function (sender, options) {
-//       // console.log(se)
-//         // options.htmlElement.onclick = function() {
-//         //     // survey.nextPage();
-//         //     console.log('yay2')
-//         // }
-//         // console.log($(`#${sender.renderedElement.id}`).next())
-//         // console.log($(`#${sender.renderedElement.id}`))
-
-//         // console.log($(`#${sender.renderedElement.id}`).find('.next-question'))
-//         // $(`#${sender.renderedElement.id}`).nextAll('.next-question').first();
-// // console.log($(`#${sender.renderedElement.id}`).nextAll('.next-question').first())
-//         // console.log($('.next-question'))
-//         console.log(options.htmlElement)
-//         let surveyNextBtn = $(`#${sender.renderedElement.id}`).nextAll('.next-question').first()
-//         console.log(surveyNextBtn[0])
-//         surveyNextBtn[0].onclick = function() {
-//           console.log('yay')
-//           console.log(survey)
-//           console.log(survey.hasErrors())
-//           // checkValidity(survey)
-//         }
-//     });
 
   questionCount = questionCount + 1;
   $("#surveyContainer" + (index + 1)).Survey({ model: survey });
@@ -168,12 +139,32 @@ function addCustomClasses(survey, options) {
   }
 }
 
-function addEventListeners(survey) {
+function addEventListeners(survey, options) {
   let surveyNextBtn = $(`#${survey.renderedElement.id}`).nextAll('.next-question').first()
 
   surveyNextBtn[0].onclick = function() {
     nextQuestion(survey)
   }
+
+  if (options.question.getType() === 'text' || options.question.getType() === 'comment') {
+    options.htmlElement.onkeyup = function () {
+      if (options.htmlElement.value.trim().length > 0) {
+        surveyNextBtn.attr('disabled', false);
+      } else {
+        surveyNextBtn.attr('disabled', true);
+      }
+    }
+  }
+
+  options.htmlElement.onchange = function () {
+    if (survey.hasErrors() === false) {
+      surveyNextBtn.attr('disabled', false);
+    } else {
+      surveyNextBtn.attr('disabled', true);
+    }
+  }
+
+  // console.log(options.htmlElement)
 }
 
 
