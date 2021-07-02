@@ -27,7 +27,7 @@ $('#survey').append(`
   </div>
 </div>
 `)
-
+console.log('test')
 exampleSurveyJSON.questions.forEach(function(question, index) {
   $('.slider-list').append(`
   <div class='question-container'>
