@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/font/Inter/styles.css">
 </head>
-<body'>
+<body>
   <div id='survey'></div>
 </body>
 <script src="dist/bundle.js?v=2"></script>

@@ -15,8 +15,6 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "babel-loader": "^8.2.2",
-    "css-loader": "^5.2.6",
-    "style-loader": "^2.0.0",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2"
   },
@@ -24,9 +22,7 @@
     "core-js": "^3.15.2",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
-    "slick-carousel": "^1.8.1",
-    "survey-jquery": "^1.8.53",
-    "swiper": "^6.7.1"
+    "survey-jquery": "^1.8.53"
   },
   "browserslist": "IE >= 11"
 }
