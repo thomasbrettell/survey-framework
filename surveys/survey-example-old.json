@@ -53,7 +53,6 @@
           "name": "What is your primary area of health?",
           "isRequired": true,
           "maxSelectedChoices": 3,
-          "customClasses": "square",
           "choices": [
             "General Practinioner",
             "Dentist",
@@ -205,8 +204,50 @@
           "type": "comment",
           "isRequired": true,
           "name": "Other",
-          "placeHolder": "Type your response within 256 characters",
+          "placeHolder": "Type here",
           "rows": 5
+        }
+      ]
+    },
+    {
+      "title": "List the other area of healthcare services h organisation provides?",
+      "elements": [
+        {
+          "titleLocation": "hidden",
+          "type": "multipletext",
+          "name": "List the other area of healthcare services h organisation provides?",
+          "items": [
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 1",
+              "placeHolder": "Other areas of health"
+            },
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 2",
+              "placeHolder": "Other areas of health"
+            },
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 3",
+              "placeHolder": "Other areas of health"
+            },
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 4",
+              "placeHolder": "Other areas of health"
+            },
+            {
+              "titleLocation": "hidden",
+              "isRequired": true,
+              "name": "Other areas of health 5",
+              "placeHolder": "Other areas of health"
+            }
+          ]
         }
       ]
     },

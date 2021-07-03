@@ -3,6 +3,9 @@ import * as Survey from "survey-jquery";
 import _ from 'lodash';
 import exampleSurveyJSON from '../surveys/survey-example.json';
 
+Survey.Serializer.addProperty("question", "customClasses:text");
+Survey.Serializer.addProperty("survey", "otherJSON:text");
+
 // console.log(exampleSurveyJSON.questions[7].elements)
 // let testObject = {
 //   "titleLocation": "hidden",
@@ -94,24 +97,35 @@ function calcProgressBar() {
 function addCustomClasses(survey, options) {
   var classes = options.cssClasses
 
-  if (options.question.customClasses) {
-    classes.root += " " + options.question.customClasses;
-  }
+  classes.root += ` ${options.question.customClasses}`;
+  // console.log(survey.cssValue)
 }
 
 //add event listners to survey elements
 function addEventListeners(survey, options) {
   let surveyNextBtn = $(`#${survey.renderedElement.id}`).nextAll('.next-question').first()
+  let charLimit = 256;
 
   //navigation functionality to next btn
   surveyNextBtn[0].onclick = function() {
     nextQuestion(survey)
   }
 
-  //key error detection for textfields and textareas
+  if (options.question.getType() === 'comment') {
+    $(`#${options.htmlElement.id}`).after(`
+      <div class='char-counter'>${charLimit} characters remaining</div>
+    `)
+  }
+
+  //key error detection for textfields and textareas (and length prevention)
   if (options.question.getType() === 'text' || options.question.getType() === 'comment') {
     options.htmlElement.onkeyup = function () {
       console.log('typed')
+      $(this).attr('maxlength', charLimit)
+      $(this).val($(this).val().substring(0, charLimit));
+      $(`#${survey.renderedElement.id} .char-counter`).text(`
+        ${charLimit - options.htmlElement.value.trim().length} characters remaining
+      `)
       if (options.htmlElement.value.trim().length > 0) {
         surveyNextBtn.attr('disabled', false);
       } else {
@@ -126,6 +140,10 @@ function addEventListeners(survey, options) {
           surveyNextBtn.attr('disabled', true);
         }
       }
+    }
+    options.htmlElement.onchange = function () {
+      console.log('changed')
+      $(this).val($(this).val().substring(0, charLimit));
     }
   //click error detection or all other input types
   } else {
