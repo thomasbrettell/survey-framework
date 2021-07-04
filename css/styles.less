@@ -515,6 +515,10 @@ body {
         width: 100%;
         border-radius: 4px;
         margin-right: 0;
+
+        input {
+          border-radius: 4px;
+        }
       }
     }
   }
@@ -538,10 +542,18 @@ body {
       cursor: pointer;
       transition: background .1s ease-in-out;
 
-      &:hover {
-        color: white;
-        background: rgba(1, 1, 1, .1);
-        background: @grey;
+      &.disabled {
+        cursor: not-allowed;
+        color: @light_grey;
+        border-color: @light_grey;
+      }
+
+      &:not(.disabled) {
+        &:hover {
+          color: white;
+          // background: rgba(0, 0, 0, 0.123);
+          background: @grey;
+        }
       }
 
       input {
@@ -556,6 +568,11 @@ body {
         background: transparent;
         appearance: none;
         cursor: pointer;
+        border-radius: 9999px;
+
+        &:disabled {
+          cursor: not-allowed;
+        }
 
         &::-ms-check {
           display: none;
@@ -570,6 +587,11 @@ body {
       label {
         background: @grey;
         color: white;
+
+        &:hover {
+          background: @grey;
+          color: white;
+        }
       }
     }
 
@@ -709,6 +731,54 @@ body {
       font-weight: 900;
       font-size: 10px;
       padding-right: 10px;
+    }
+  }
+
+  .textbox {
+    background-color: rgba(0, 91, 166, 0.08);
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    position: relative;
+
+    .wrapper {
+      overflow-y: auto;
+      padding: 15px;
+      max-height: 200px;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .header {
+      color: @blue;
+      font-weight: 600;
+    }
+
+    .body {
+      color: @dark_grey;
+    }
+
+    .scrollbar-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color:#f5f8fb;
+      height: 100%;
+      width: 5px;
+      overflow: hidden;
+    }
+
+    .scrollbar {
+      background-color: @blue;
+      width: 100%;
+      height: 29%;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
   }
 }

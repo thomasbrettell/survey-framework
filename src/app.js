@@ -5,6 +5,7 @@ import exampleSurveyJSON from '../surveys/survey-example.json';
 
 Survey.Serializer.addProperty("question", "customClasses:text");
 Survey.Serializer.addProperty("survey", "otherJSON:text");
+Survey.Serializer.addProperty("survey", "textbox:text");
 
 // console.log(exampleSurveyJSON.questions[7].elements)
 // let testObject = {
@@ -69,13 +70,40 @@ function initialiseQuestion(nextQuestion) {
 
   survey.checkErrorsMode = 'onComplete';
   survey.onUpdateQuestionCssClasses.add(addCustomClasses)
-  survey.onAfterRenderQuestionInput.add(addEventListeners)
+  survey.onAfterRenderQuestionInput.add(afterQuestionRender)
 
   $("#surveyContainer" + questionCount).Survey({ model: survey });
   $('.sv_complete_btn').remove();
   $('.sv_prev_btn').remove();
   $('.sv_next_btn').remove();
   $('.sv_preview_btn').remove();
+
+  if(survey.textbox) {
+    let surveyId = survey.renderedElement.id
+    $(`#${surveyId} .sv_header`).after(`
+      <div class='textbox'>
+        <div class='wrapper'>
+          <div class='header'>${survey.textbox.header}</div>
+          <div class='body'>${survey.textbox.body}</div>
+        </div>
+        <div class='scrollbar-container'>
+          <div class='scrollbar'></div>
+        </div>
+      </div>
+    `)
+    if($(`#${surveyId} .textbox`).height() < 200) {
+      $(`#${surveyId} .textbox .scrollbar`).hide()
+    }
+    $(`#${surveyId} .textbox .wrapper`).scroll(function() { 
+      let scrollBarHeight = $(`#${surveyId} .textbox .scrollbar`).height()
+      let scrollContainerHeight = $(`#${surveyId} .textbox`).height()
+      let scrollPos = $(this).scrollTop()
+      let scrollHeight = $(`#${surveyId} .textbox .wrapper`).prop('scrollHeight')-scrollContainerHeight
+      let scrollPercent = scrollPos/scrollHeight
+      let scrollBarPos = (scrollContainerHeight-scrollBarHeight)*scrollPercent
+      $(`#${surveyId} .textbox .scrollbar`).css('transform' ,`translateY(${scrollBarPos}px)`)
+    })
+  }
 }
 
 
@@ -101,8 +129,8 @@ function addCustomClasses(survey, options) {
   // console.log(survey.cssValue)
 }
 
-//add event listners to survey elements
-function addEventListeners(survey, options) {
+//post question render setup (adding eventlistners and adding custom elements)
+function afterQuestionRender(survey, options) {
   let surveyNextBtn = $(`#${survey.renderedElement.id}`).nextAll('.next-question').first()
   let charLimit = 256;
 
@@ -149,6 +177,13 @@ function addEventListeners(survey, options) {
   } else {
     options.htmlElement.onclick = function () {
       console.log('clicked')
+      $(`#${survey.renderedElement.id} input`).each(function() {
+        if($(this).attr('disabled')) {
+          $(this).parent().addClass('disabled')
+        } else {
+          $(this).parent().removeClass('disabled')
+        }
+      })
       if (survey.hasErrors(false) === false) {
         surveyNextBtn.attr('disabled', false);
       } else {
@@ -229,7 +264,7 @@ function nextQuestion(survey) {
     $('.slider-list').toggleClass('transitioning')
     setTimeout(function() {
       $('.slider-list').toggleClass('transitioning')
-      $('.question-container')[0].remove()
+      $('.question-container').eq(0).remove()
       $('.slider-list').css('transform', `translateY(0px)`)
     }, 500)
     $('.slider-list').css('transform', `translateY(-${$('#survey').height()}px)`)
