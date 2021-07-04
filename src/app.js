@@ -21,6 +21,7 @@ Survey.Serializer.addProperty("survey", "textbox:text");
 let surveyJSON = exampleSurveyJSON
 let surveyResults = [];
 let questionCount = 0;
+let officialQuestionCount = 0;
 let questionTotal = surveyJSON.questions.length
 
 
@@ -72,7 +73,7 @@ function initialiseQuestion(nextQuestion) {
   survey.onUpdateQuestionCssClasses.add(addCustomClasses)
   survey.onAfterRenderQuestionInput.add(afterQuestionRender)
 
-  $("#surveyContainer" + questionCount).Survey({ model: survey });
+  $(`#surveyContainer${questionCount}`).Survey({ model: survey });
   $('.sv_complete_btn').remove();
   $('.sv_prev_btn').remove();
   $('.sv_next_btn').remove();
@@ -109,9 +110,9 @@ function initialiseQuestion(nextQuestion) {
 
 //move and animates progress bar
 function calcProgressBar() {
-  $('.progress-bar .progress').css('width', `${((questionCount)/questionTotal)*100}%`)
+  $('.progress-bar .progress').css('width', `${((officialQuestionCount)/questionTotal)*100}%`)
 
-  $({value: ((questionCount-1)/questionTotal)*100}).animate({value: ((questionCount)/questionTotal)*100}, {
+  $({value: ((officialQuestionCount-1)/questionTotal)*100}).animate({value: ((officialQuestionCount)/questionTotal)*100}, {
     duration: 500,
     easing:'swing',
     step: function() {
@@ -253,13 +254,19 @@ function appendQuestion(question, location) {
 //navigation to next question
 function nextQuestion(survey) {
   if(survey.hasErrors() === false) {
-    questionCount++;
-    console.log(selectNextQuestion(survey.data))
-    appendedNextQuestion(surveyJSON.questions[questionCount])
-    calcProgressBar()
-
     surveyResults.push(survey.data)
     console.log(surveyResults)
+    questionCount++;
+    console.log(survey.otherJSON)
+    
+    if(selectNextQuestion(survey.data) === "other" && survey.otherJSON) {
+      console.log("other")
+      appendedNextQuestion(survey.otherJSON)
+    } else {
+      officialQuestionCount++;
+      appendedNextQuestion(surveyJSON.questions[officialQuestionCount])
+      calcProgressBar()
+    }
     
     $('.slider-list').toggleClass('transitioning')
     setTimeout(function() {
@@ -274,16 +281,16 @@ function nextQuestion(survey) {
 function selectNextQuestion(questionData) {
   if (_.includes(questionData, "Other")) {
     console.log("1")
-    return true;
+    return "other";
   }
   if (_.includes(questionData[Object.keys(questionData)[0]], "Other")) {
     console.log("2")
-    return true;
+    return "other";
   }
   if (Array.isArray(questionData[Object.keys(questionData)[0]])) {
     if (_.includes(questionData[Object.keys(questionData)[0]].flatMap(ans => Object.values(ans)), "Other")) {
       console.log("3")
-      return true;
+      return "other";
     }
   }
   console.log('Didnt find other')
